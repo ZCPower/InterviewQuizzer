@@ -18,7 +18,7 @@ server.use(cors())
 const apiRouter = require('./API');
 server.use('/api', apiRouter);
 
-const { client } = require('./DB');
+const { client } = require('./DB/client');
 client.connect();
 
 server.listen(PORT, () => {
