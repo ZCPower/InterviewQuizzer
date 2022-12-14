@@ -9,6 +9,7 @@ const { createUser } = require('../DB/models/users')
 const userRouter = require('./users');
 apiRouter.use('/users', userRouter)
 
-
+const flashRouter = require('./flashcards');
+apiRouter.use('/flash', flashRouter)
 
 module.exports = apiRouter;

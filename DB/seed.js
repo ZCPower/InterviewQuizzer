@@ -1,7 +1,7 @@
 const { client } = require('./client');
 const { createNewFlashcard } = require('./models/flashcard');
-
-const { createUser } = require('./models/users.js')
+const { createNewDeck } = require('./models/decks')
+const { createUser } = require('./models/users.js');
 
 
 async function dropTables() {
@@ -9,9 +9,10 @@ async function dropTables() {
     try {
 
         await client.query(`
-        DROP TABLE IF EXISTS multiplechoice;
-        DROP TABLE IF EXISTS flashcards;
-        DROP TABLE IF EXISTS users;`)
+        DROP TABLE IF EXISTS multiplechoice CASCADE;
+        DROP TABLE IF EXISTS decks CASCADE;
+        DROP TABLE IF EXISTS flashcards CASCADE;
+        DROP TABLE IF EXISTS users CASCADE;`)
 
         console.log('Finished dropping tables...')
 
@@ -30,22 +31,32 @@ async function createTables() {
             username varchar(255) UNIQUE NOT NULL,
             password varchar(255) NOT NULL,
             email varchar(255) UNIQUE NOT NULL,
-            "isAdmin" varchar(255) NOT NULL DEFAULT false,
-            "userPhoto" varchar(255) NOT NULL DEFAULT 'https://img.icons8.com/ios-glyphs/344/user--v1.png'
+            "isAdmin" varchar(255) DEFAULT false,
+            "userPhoto" varchar(255) DEFAULT 'https://img.icons8.com/ios-glyphs/344/user--v1.png'
+        );
+
+        CREATE TABLE decks(
+            id SERIAL PRIMARY KEY,
+            topic varchar(255) NOT NULL,
+            "creatorId" INT REFERENCES users(id),
+            "dateCreated" INT DEFAULT ${Date.now()}
         );
         
         CREATE TABLE flashcards(
             id SERIAL PRIMARY KEY, 
             front varchar(255) UNIQUE NOT NULL,
             back varchar(255) NOT NULL,
-            category varchar(255) NOT NULL
+            topic varchar(255) NOT NULL,
+            "deckId" INT REFERENCES decks(id)
         );
+
 
         CREATE TABLE multiplechoice(
         id SERIAL PRIMARY KEY,
         question varchar(255) UNIQUE NOT NULL,
+        "creatorId" INT REFERENCES users(id),
         answer varchar(255) NOT NULL,
-        category varchar(255) NOT NULL
+        topic varchar(255) NOT NULL
         );
         
         `);
@@ -79,6 +90,27 @@ async function createInitialUsers() {
     }
 }
 
+//CREATE DECKS 
+async function createInitialDecks() {
+    console.log('CREATING INITIAL DECKS...')
+    try {
+        const decksToCreate = [{
+            topic: 'React',
+            creatorId: 1,
+            // dateCreated: Date.now()
+        }]
+
+        const decks = await Promise.all(decksToCreate.map(createNewDeck))
+        console.log(decks);
+        return decks;
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
+
+//CREATE CARDS
 async function createInitialFlashCards() {
     console.log("Creating initial flashcards...");
     try {
@@ -86,16 +118,15 @@ async function createInitialFlashCards() {
             {
                 front: 'Your mom',
                 back: 'Is hot.',
-                category: 'Test'
+                topic: 'Test',
+                deckId: 1
             }
         ];
 
         const cards = await Promise.all(cardsToCreate.map(createNewFlashcard));
-
         console.log("Finished creating initial cards!!!");
 
         return cards
-
     } catch (error) {
         console.error("Error creating cards!!!");
         throw error;
@@ -107,8 +138,10 @@ async function rebuildDB() {
         client.connect()
         await dropTables();
         await createTables();
-        await createInitialFlashCards();
         await createInitialUsers();
+        await createInitialDecks();
+        await createInitialFlashCards();
+
         // console.log(client)
     }
     catch (error) {
@@ -121,3 +154,9 @@ rebuildDB()
     // .then(testDB())
     .catch(console.error)
     // .finally(() => client.end())
+
+
+
+    //Perhaps I should have decks have the option of being private or not?
+        // that way users can browse flashcards even without an account.
+            //only can create cards/decks if they have an account.

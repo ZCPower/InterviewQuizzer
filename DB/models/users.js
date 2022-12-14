@@ -3,10 +3,8 @@ const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
 async function createUser({ username, password, email, isAdmin, userPhoto }) {
-    // console.log("trying to create user", username, password, email, isAdmin, userPhoto)
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
     try {
-        // console.log(client)
         const {
             rows: [user]
         } = await client.query(
@@ -18,8 +16,7 @@ async function createUser({ username, password, email, isAdmin, userPhoto }) {
             `,
             [username, hashedPassword, email, isAdmin, userPhoto]
         );
-        // console.log(rows)
-        console.log(user)
+
         return user;
     } catch (error) {
         console.error(error);
@@ -27,6 +24,57 @@ async function createUser({ username, password, email, isAdmin, userPhoto }) {
     }
 }
 
+async function getUserById(userId) {
+    try {
+        const {
+            rows: [user],
+        } = await client.query(`
+        SELECT id, username, password, email, "isAdmin", "userPhoto"
+        FROM users
+        WHERE id=${userId}
+        `);
+
+        if (!user) {
+            return null;
+        }
+        delete user.password;
+        return user;
+    } catch (error) {
+        console.error(error)
+        throw error;
+    }
+}
+
+async function getAllUsers() {
+    try {
+        const { rows } = await client.query(`
+        SELECT id, username, email, "isAdmin", "userPhoto"
+        FROM users
+    `);
+        return rows
+    } catch (error) {
+        console.error(error)
+        throw error;
+    }
+}
+
+async function getUserByUsername(username) {
+    console.log('username by username', username)
+    try {
+        const { rows: [user] } = await client.query(`
+        SELECT * from users
+        WHERE username = $1
+        ;`, [username])
+
+        return user
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 module.exports = {
-    createUser
+    createUser,
+    getUserById,
+    getAllUsers,
+    getUserByUsername
 }
