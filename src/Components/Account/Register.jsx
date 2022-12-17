@@ -54,39 +54,42 @@ function Register() {
         <div id='regContainer' className='flex w-full h-full justify-center
         items-center'>
             {/* border or not? */}
-            <form id='regForm' onSubmit={handleRegSubmit} className='h-3/4 w-1/2 flex flex-col items-center bg-gray justify-between'>
-                <div className='bg-white text-midOrange font-quicksand text-3xl w-full h-1/6 text-center flex justify-center items-center'><h2 >Create an account</h2>
+            <form id='regForm' onSubmit={handleRegSubmit} className='h-3/4 w-2/3 xl:w-1/2 flex flex-col items-center bg-gray justify-between rounded-2xl '>
+                <div className='bg-white text-midOrange font-quicksand text-xl md:text-2xl 2xl:text-3xl w-full h-1/6 text-center flex justify-center items-center rounded-t-2xl'><h2 >Create an account</h2>
                 </div>
 
-                {/* Row 1 */}
-                <div className='flex justify-between w-3/4'>
-
+                <div className='flex flex-col justify-evenly w-3/4 h-1/2 gap-2'>
+                    {/* Row 1 */}
+                    {/* <div className='flex flex-col gap-4'> */}
                     <div className='flex flex-col gap-2'>
-                        <label className='font-bold'>Username</label>
-                        <input className='text-lg p-1' placeholder='Enter your username' onChange={handleNameChange}
+                        <label className='font-bold text-sm md:text-base'>Username</label>
+                        <input className='text-base md:text-lg p-1 md:p-2' placeholder='Enter your username' onChange={handleNameChange}
                         ></input>
                     </div>
                     <div className='flex flex-col gap-2'>
-                        <label className='font-bold'>Email</label>
-                        <input type='email' className='text-lg p-1' placeholder='Enter your email' onChange={handleEmailChange}></input>
+                        <label className='font-bold text-sm md:text-base'>Email</label>
+                        <input type='email' className='text-base md:text-lg p-1 md:p-2' placeholder='Enter your email' onChange={handleEmailChange}></input>
                     </div>
-                </div>
+                    {/* </div> */}
 
-                {/* Row 2 */}
-                <div className='flex justify-between w-3/4'>
+                    {/* Row 2 */}
+                    {/* <div className='flex flex-col justify-between w-3/4'> */}
                     <div className='flex flex-col gap-2'>
-                        <label className='font-bold'>Password</label>
-                        <input type='password' className='text-lg p-1' placeholder='Enter your password' onChange={handlePassChange}></input>
+                        <label className='font-bold text-sm md:text-base'>Password</label>
+                        <input type='password' className='text-base md:text-lg p-1 md:p-2' placeholder='Enter your password' onChange={handlePassChange}></input>
                     </div>
                     <div className='flex flex-col gap-2'>
-                        <label className='font-bold'>Confirm Password</label>
+                        <label className='font-bold text-sm md:text-base'>Confirm Password</label>
                         <input type='password'
-                            className='text-lg p-1'
+                            className='text-base md:text-lg p-1 md:p-2'
                             placeholder='Confirm your password' onChange={handleConfirmPass}></input>
                     </div>
+                    {/* </div> */}
                 </div>
-
-                <button className='bg-midOrange text-white p-3 text-lg font-quicksand mb-4'>Create Account!</button>
+                <div className='mb-4 md:mb-10 text-center flex flex-col gap-1'>
+                    <button className='bg-midOrange text-white  p-2 text-base md:p-3 2xl:text-lg font-quicksand '>Create Account!</button>
+                    <p className='text-xs'>Already have an account? Login here!</p>
+                </div>
             </form>
         </div >
     )
