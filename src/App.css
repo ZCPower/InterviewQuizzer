@@ -3,5 +3,6 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #eee;
+  background-color: #f8f3f3;
+  /* this ^ or #eee? */
 }

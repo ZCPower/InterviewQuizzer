@@ -31,7 +31,7 @@ async function createTables() {
             username varchar(255) UNIQUE NOT NULL,
             password varchar(255) NOT NULL,
             email varchar(255) UNIQUE NOT NULL,
-            "isAdmin" varchar(255) DEFAULT false,
+            "isAdmin" BOOLEAN NOT NULL DEFAULT false,
             "userPhoto" varchar(255) DEFAULT 'https://img.icons8.com/ios-glyphs/344/user--v1.png'
         );
 
@@ -39,7 +39,8 @@ async function createTables() {
             id SERIAL PRIMARY KEY,
             topic varchar(255) NOT NULL,
             "creatorId" INT REFERENCES users(id),
-            "dateCreated" INT DEFAULT ${Date.now()}
+            "dateCreated" varchar(255) NOT NULL,
+            "isPublic" BOOLEAN NOT NULL DEFAULT FALSE
         );
         
         CREATE TABLE flashcards(
@@ -97,7 +98,12 @@ async function createInitialDecks() {
         const decksToCreate = [{
             topic: 'React',
             creatorId: 1,
+            isPublic: true
             // dateCreated: Date.now()
+        }, {
+            topic: 'JavaScript',
+            creatorId: 1,
+            isPublic: false
         }]
 
         const decks = await Promise.all(decksToCreate.map(createNewDeck))

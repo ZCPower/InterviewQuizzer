@@ -45,6 +45,7 @@ async function getUserById(userId) {
     }
 }
 
+//for admin only.
 async function getAllUsers() {
     try {
         const { rows } = await client.query(`
@@ -71,6 +72,25 @@ async function getUserByUsername(username) {
         console.error(error)
     }
 }
+
+//Delete user? Can be done by admin and/or User if userId === creatorId.
+async function deleteUser() {
+
+}
+
+//update user? perhaps name/photo/password?
+async function updateUserName() {
+
+}
+
+async function updateUserPassword() {
+
+}
+
+async function updateUserPhoto() {
+
+}
+//an admin can maybe upgrade a user to admin?
 
 module.exports = {
     createUser,

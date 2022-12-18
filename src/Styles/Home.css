@@ -5,3 +5,9 @@
     /* background-repeat: no-repeat; */
     /* background-position: 0vh; */
 }
+
+#homeImage,
+#greeting {
+    box-shadow: 2px 2px 20px 5px #aaa;
+    ;
+}

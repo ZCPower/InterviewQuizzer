@@ -20,6 +20,10 @@ async function createNewFlashcard({ front, back, topic, deckId }) {
     }
 }
 
+async function getFlashCardsByDeck() {
+    //check if public, if not... check that creatorId === userId;
+}
+
 async function getAllFlashcards() {
     try {
         const {
@@ -32,6 +36,18 @@ async function getAllFlashcards() {
         console.error(error)
     }
 }
+
+//edit card's front, back, deck? perhaps need to think of a way of attaching card to deck other than deckId? Can a card be a part of multiple decks? Perhaps they can select from their existing decks and place that card in those decks?
+async function modifyFlashcard() {
+
+}
+
+
+//delete flashcard with associated ID.
+async function deleteFlashcard() {
+
+}
+
 
 module.exports = {
     createNewFlashcard,

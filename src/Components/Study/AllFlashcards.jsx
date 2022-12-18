@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { fetchAllFlashcards } from '../api/flash';
+import { fetchAllFlashcards } from '../../api/flash';
 
 function AllFlashcards() {
 

@@ -2,6 +2,7 @@ import React from 'react'
 import NavAccount from './NavAccount'
 
 function Header() {
+    // add accordion/hamburger icon at smaller viewports...
     return (
         <header className='bg-white w-full flex justify-around items-center border-b-2 border-midOrange'>
             <div className='flex'>
