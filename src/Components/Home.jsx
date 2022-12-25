@@ -14,7 +14,7 @@ function Home() {
 
     //This only displays if no token. Else... go to study page where they can choose their decks/other games...
     return (
-        <div id='homeContainer' className='w-full flex items-center justify-evenly' style={{
+        <div id='homeContainer' className='w-full h-full flex justify-evenly items-center' style={{
             // backgroundImage: `url(${currentImage})`
         }}>
             <img id='homeImage' className='h-2/3' src={currentImage}></img>
