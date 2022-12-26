@@ -5,11 +5,11 @@ module.exports = {
   ],
   theme: {
     colors: {
-      orange: '#ff5400',
+      orange: '#ff6600',
       midOrange: '#ff4800',
       black: '#000000',
       white: '#ffffff',
-      gray: '#cccccc'
+      gray: '#cccccc',
     },
     extend: {
       fontFamily: {

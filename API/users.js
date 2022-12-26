@@ -24,17 +24,33 @@ userRouter.post('/register', async (req, res, next) => {
     console.log(username, password, email)
 
     try {
-        const user = await createUser({
-            username: username,
-            password: password,
-            email: email,
-            isAdmin: isAdmin,
-            userPhoto: userPhoto
-        })
+
+        //Check for Existing User, send error if existing.
+        const existingUser = await getUserByUsername(username);
+
+        if (existingUser) {
+            console.log('this user name exists')
+            res.send({ message: 'This username already exists.' })
+        }
+
+        // Check for existing Emails, too.
 
 
-        console.log(user)
-        res.send(user)
+        else {
+            const user = await createUser({
+                username: username,
+                password: password,
+                email: email,
+                isAdmin: isAdmin,
+                userPhoto: userPhoto
+            });
+
+            res.send({
+                user: user,
+                message: `Thank you for registering, ${username}!`
+            })
+        }
+
     } catch (error) {
         next(error)
     }

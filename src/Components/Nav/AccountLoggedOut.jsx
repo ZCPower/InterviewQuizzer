@@ -24,6 +24,7 @@ function NavAccount() {
         {accountOpen ? (
           <ul className='absolute right-30 z-10 flex flex-col pt-12 text-center'>
 
+
             {/* Login Button */}
             <li className='border-b-2 border-midOrange py-2 w-40 bg-white hover:text-midOrange'><Link to='login'>Login</Link></li>
 

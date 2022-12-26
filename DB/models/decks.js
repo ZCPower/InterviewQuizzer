@@ -21,8 +21,7 @@ async function getAllPublicDecks() {
     try {
         const { rows } = await client.query(`
             SELECT * FROM decks
-            WHERE "isPublic" = true
-            RETURNING *;
+            WHERE "isPublic" = true;
         `);
 
 

@@ -1,43 +1,59 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-  Outlet
-} from "react-router-dom";
+//React Router
+import { Outlet } from "react-router-dom";
 
 //Component Imports
 import Header from './Components/Nav/Header'
-import AllFlashCards from './Components/Study/AllFlashcards'
-import Register from './Components/Account/Register'
-import Login from './Components/Account/Login'
-import Home from './Components/Home'
-import Browse from './Components/Browse'
-import StudyHome from './Components/Study/StudyHome'
 
+
+//Toastify
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
-  const [token, setToken] = useState('');
+  const tokenFromStorage = localStorage.getItem("jwt");
+  const [token, setToken] = useState(tokenFromStorage);
+
+
   const [user, setUser] = useState({});
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem('user'));
+    if (userInfo) {
+      setUser(userInfo);
+    }
+  }, []);
+  //Might need to tinker with this. On render, check token and then generate user that way?
 
-  console.log(token, 'token')
 
+  const errorMessage = (message) => toast.error(message)
+  const successMessage = (message) => toast.success(message)
   return (
     <div className="App">
 
-      {/* ORGANIZE THIS SHIT ONCE ROUTER IS SET UP CAUSE GOD DAMN. */}
-      <Header token={token} user={user} />
-      <Outlet context />
-      {/* <AllFlashCards /> */}
-      {/* <Register /> */}
-      {/* <Login setToken={setToken} /> */}
-      {/* <Browse /> */}
-      {/* <StudyHome /> */}
-      {/* <Home /> */}
+      <Header token={token} user={user} setToken={setToken} setUser={setUser} />
+      <Outlet context={{
+        errorMessage,
+        successMessage,
+        token,
+        setToken,
+        user,
+        setUser
+      }} />
+
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored" />
     </div>
   )
 }

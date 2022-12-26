@@ -1,7 +1,7 @@
 /*
-What this app will be: Essentially a Quizlet Clone that I will use to prep for interviews. 
+What this app will be: Essentially a Quizlet Clone that I will use to prep for interviews.
 
-Wants: 
+Wants:
     - Flashcards with options that I can click on.
         -- Front and back
             -user can decide which side is displayed first.
@@ -14,26 +14,26 @@ Wants:
     - Tracker of:
         - What questions they got right, how many.
         - How many times they have completed a set.
-        - How many cards they have completed this session? 
+        - How many cards they have completed this session?
     - Make it more game like?
         -- Answer/Complete a certain amount of questions to earn points
             -- points can be used to reach checkpoints??
                 --Make it like an adventure or silly game?
 
-RoadMap: 
+RoadMap:
     --Backend
         --Need API and DB for:
             -Users
                 -username/password
             -Card Sets
-                -name of set 
+                -name of set
                 -Questions/Cards of set
                     -will require joins
             -Cards Questions
                 -Front
                 -Back
             - Mulitple Choice
-                - Questions: 
+                - Questions:
                     - What is: [random front of card/question]
                     - 3 Random answers related to topic
                     - 1 real answer which would be the back associated with the questions ID.
@@ -42,6 +42,11 @@ RoadMap:
 
 
 
-Extras: 
+Extras:
     - TypeScript?
 */
+
+
+
+
+// With new Router, figureout how to redirect to study if user is already logged and enters /login. Don't want to be able to login twice.

@@ -9,6 +9,9 @@ import Home from './Components/Home';
 import StudyHome from './Components/Study/StudyHome';
 import Login from './Components/Account/Login';
 import Register from './Components/Account/Register';
+import MyDecks from './Components/Study/MyDecks';
+import MyAccount from './Components/Account/MyAccount';
+import Browse from './Components/Browse/Browse';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +24,13 @@ const router = createBrowserRouter([
         element: <Home />
       }, {
         path: 'study',
-        element: <StudyHome />
+        element: <StudyHome />,
+        children: [
+          // {
+          //   path: 'myDecks',
+          //   element: <MyDecks />
+          // }
+        ]
       },
       {
         path: 'login',
@@ -30,6 +39,17 @@ const router = createBrowserRouter([
       {
         path: 'register',
         element: <Register />
+      },
+      {
+        path: 'myDecks',
+        element: <MyDecks />
+      }, {
+        path: 'account',
+        element: <MyAccount />
+      },
+      {
+        path: 'browse',
+        element: <Browse />
       }
     ]
   }
