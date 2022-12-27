@@ -12,7 +12,7 @@ apiRouter.use('/users', userRouter)
 const flashRouter = require('./flashcards');
 apiRouter.use('/flash', flashRouter);
 
-const deckRouter = require('./decks.js');
+const deckRouter = require('./decks');
 apiRouter.use('/decks', deckRouter);
 
 module.exports = apiRouter;

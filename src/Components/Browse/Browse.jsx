@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { fetchAllPublicDecks } from '../../api/flash'
+import DeckPreview from './DeckPreview';
 
 function Browse() {
     const [pubDecks, setPubDecks] = useState([]);
@@ -22,29 +23,25 @@ function Browse() {
 
     let mappedDecks = pubDecks.map((x) => {
         return (
-            <div className='bg-white flex flex-col p-4 gap-y-5 border-b-8 border-b-white hover:border-b-orange transition duration-500 ease-out hover:ease-in'>
-                <div>
-                    <h3 className='text-orange text-xl'>{x.topic}</h3>
-                    <p className='text-black'>#69 Terms</p>
-                </div>
-                <h4 className='text-orange text-lg'>Creator</h4>
-                {/* I would like to see....
-                
-                Creator's Profile Picture, amount of terms in the deck.
+            <DeckPreview creatorId={x.creatorId} topic={x.topic} creatorName={x.creatorName} />
 
-                Link to that deck where the user can use flashcards.
 
-                Remove duplicates in DB.
-                */}
-            </div>
+            //     Creator's Profile Picture, amount of terms in the deck.
+
+            //Don't want this info hard coded. I want to create API call that takes creatorId and then finds the user and puts in their name and Photo.
+
+            //     Link to that deck where the user can use flashcards.
+
+            //     Remove duplicates in DB.
+            //     */}
         )
     })
 
     return (
         <div className='w-full h-full flex flex-col gap-2 pt-2 items-center'>
-            <h2 className='text-center font-bold text-xl'>Browse Public Decks</h2>
+            <h2 className='text-left font-bold text-xl ml-5 self-start'>Browse Public Decks</h2>
 
-            <div id='publicDeckContainer' className='px-2 xl:px-4 w-full grid grid-cols-2 xl:grid-cols-4 gap-2'>{mappedDecks}</div>
+            <div id='publicDeckContainer' className='px-4 xl:px-4 w-full grid grid-cols-2 xl:grid-cols-4 gap-4'>{mappedDecks}</div>
         </div>
     )
 }

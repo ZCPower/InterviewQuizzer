@@ -1,14 +1,14 @@
 const { client } = require('../client');
 
-async function createNewDeck({ topic, creatorId, isPublic }) {
+async function createNewDeck({ topic, creatorId, isPublic, creatorName }) {
     let currentDate = new Date().toLocaleDateString();
 
     try {
         const { rows: [deck] } = await client.query(`
-            INSERT INTO decks(topic, "creatorId", "dateCreated", "isPublic")
-            VALUES ($1, $2, $3, $4)
+            INSERT INTO decks(topic, "creatorId", "dateCreated", "isPublic", "creatorName")
+            VALUES ($1, $2, $3, $4, $5)
             RETURNING *;
-        `, [topic, creatorId, currentDate, isPublic]);
+        `, [topic, creatorId, currentDate, isPublic, creatorName]);
 
         return deck
     } catch (error) {

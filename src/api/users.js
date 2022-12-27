@@ -45,3 +45,29 @@ export async function loginUser(username, password) {
         console.error(error)
     }
 }
+
+
+//get user from Req.body 
+export async function getUserByBody(creatorId) {
+    const url = `${baseURL}/users/id`;
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                creatorId: creatorId
+            })
+        });
+
+        const data = response.json();
+        console.log(data)
+        return data
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
+//get user from req.params

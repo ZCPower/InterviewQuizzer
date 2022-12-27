@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function AccountLoggedIn({ setToken, user }) {
+    console.log(user)
     const [accountOpen, setAccountOpen] = useState(false)
 
     const accountEnter = () => {
@@ -21,7 +22,10 @@ function AccountLoggedIn({ setToken, user }) {
     return (
         <div >
             <li onMouseLeave={accountLeave} onMouseEnter={accountEnter} className='w-full flex justify-evenly gap-2'>
-                {user.username}<img className='h-6 self-center' src='https://cdn-icons-png.flaticon.com/128/3033/3033143.png' ></img>
+                {user.username}<img className='h-7 self-center' src=
+                    {user.userPhoto ? user.userPhoto : 'https://cdn-icons-png.flaticon.com/128/3033/3033143.png'}>
+
+                </img>
 
 
                 {accountOpen ? (

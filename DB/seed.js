@@ -21,6 +21,8 @@ async function dropTables() {
     }
 }
 
+
+//WOULD THE FLASHCARDS EVEN NEED A TOPIC SINCE THATS WHAT THE DECK NAME IS FOR.
 async function createTables() {
     console.log('Starting to build tables...');
     try {
@@ -40,17 +42,19 @@ async function createTables() {
             topic varchar(255) NOT NULL,
             "creatorId" INT REFERENCES users(id),
             "dateCreated" varchar(255) NOT NULL,
-            "isPublic" BOOLEAN NOT NULL DEFAULT FALSE
+            "isPublic" BOOLEAN NOT NULL DEFAULT FALSE,
+            "creatorName" varchar(255) REFERENCES users(username)
         );
         
         CREATE TABLE flashcards(
             id SERIAL PRIMARY KEY, 
             front varchar(255) UNIQUE NOT NULL,
             back varchar(255) NOT NULL,
-            topic varchar(255) NOT NULL,
+        
             "deckId" INT REFERENCES decks(id)
         );
 
+        
 
         CREATE TABLE multiplechoice(
         id SERIAL PRIMARY KEY,
@@ -75,10 +79,24 @@ async function createInitialUsers() {
         const usersToCreate = [
             {
                 username: 'ZCPower',
-                password: 'pass1234',
+                password: 'password',
                 email: 'zpower.dev@gmail.com',
                 isAdmin: true,
                 userPhoto: 'https://imageio.forbes.com/specials-images/imageserve/5bb22ae84bbe6f67d2e82e05/0x0.jpg?format=jpg&crop=1012,1013,x627,y129,safe&height=416&width=416&fit=bounds'
+            },
+            {
+                username: 'HankHill',
+                password: 'password',
+                email: 'propane@gmail.com',
+                isAdmin: false,
+                userPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwI2NFQFK5E1nVOBryhh16TJMmUnDvyuGVwA&usqp=CAU'
+            },
+            {
+                username: 'Brandon',
+                password: 'password',
+                email: 'DarkBrandonRising@gmail.com',
+                isAdmin: false,
+                userPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY2zhY-OvqFyR2fDo8QsoLEZxwnoPnTxl6-A&usqp=CAU'
             }
         ];
 
@@ -98,12 +116,14 @@ async function createInitialDecks() {
         const decksToCreate = [{
             topic: 'React',
             creatorId: 1,
-            isPublic: true
+            isPublic: true,
+            creatorName: 'ZCPower'
             // dateCreated: Date.now()
         }, {
             topic: 'JavaScript',
             creatorId: 1,
-            isPublic: false
+            isPublic: false,
+            creatorName: 'ZCPower'
         }]
 
         const decks = await Promise.all(decksToCreate.map(createNewDeck))
@@ -124,7 +144,7 @@ async function createInitialFlashCards() {
             {
                 front: 'Your mom',
                 back: 'Is hot.',
-                topic: 'Test',
+                // topic: 'React',
                 deckId: 1
             }
         ];

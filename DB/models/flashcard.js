@@ -1,17 +1,17 @@
 const { client } = require('../client');
 
-async function createNewFlashcard({ front, back, topic, deckId }) {
+async function createNewFlashcard({ front, back, deckId }) {
     try {
         // console.log(client)
         const {
             rows: [flashcard]
         } = await client.query(
             `
-        INSERT INTO flashcards(front, back, topic, "deckId")
-        VALUES ($1, $2, $3, $4)
+        INSERT INTO flashcards(front, back, "deckId")
+        VALUES ($1, $2, $3)
         RETURNING *;
             `,
-            [front, back, topic, deckId]
+            [front, back, deckId]
         );
         return flashcard;
     } catch (error) {
@@ -20,8 +20,20 @@ async function createNewFlashcard({ front, back, topic, deckId }) {
     }
 }
 
-async function getFlashCardsByDeck() {
+async function getFlashCardsByDeck(deckId) {
     //check if public, if not... check that creatorId === userId;
+
+    try {
+        const { rows } = await client.query(`
+            SELECT * FROM flashcards
+            WHERE "deckId" = $1
+            `, [deckId]);
+
+        return rows
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 }
 
 async function getAllFlashcards() {
@@ -52,5 +64,5 @@ async function deleteFlashcard() {
 module.exports = {
     createNewFlashcard,
     getAllFlashcards,
-
+    getFlashCardsByDeck
 }
