@@ -12,6 +12,7 @@ import Register from './Components/Account/Register';
 import MyDecks from './Components/Study/MyDecks';
 import MyAccount from './Components/Account/MyAccount';
 import Browse from './Components/Browse/Browse';
+import IndividualDeck from './Components/Browse/IndividualDeck';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: 'browse',
         element: <Browse />
+      },
+      {
+        path: 'decks/:deckId',
+        element: <IndividualDeck />
       }
     ]
   }

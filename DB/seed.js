@@ -50,7 +50,6 @@ async function createTables() {
             id SERIAL PRIMARY KEY, 
             front varchar(255) UNIQUE NOT NULL,
             back varchar(255) NOT NULL,
-        
             "deckId" INT REFERENCES decks(id)
         );
 

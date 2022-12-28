@@ -56,32 +56,6 @@ userRouter.post('/register', async (req, res, next) => {
     }
 })
 
-//get user by id by params.
-userRouter.get('/:userId', async (req, res, next) => {
-    const { userId } = req.params
-    console.log('getting user with id', userId)
-    console.log(userId)
-    console.log(req.params)
-    try {
-        const user = await getUserById(userId)
-        res.send(user)
-    } catch (error) {
-        next(error)
-    }
-})
-
-//get user by id by body. for the flash card preview page.
-userRouter.get('/id', async (req, res, next) => {
-    const { creatorId } = req.body;
-
-    try {
-        const user = await getUserById(creatorId)
-        console.log(user, 'user')
-        res.send(user)
-    } catch (error) {
-        next(error)
-    }
-})
 
 //login 
 userRouter.post('/login', async (req, res, next) => {
@@ -121,6 +95,33 @@ userRouter.post('/login', async (req, res, next) => {
                 res.send(confirmation)
             }
         }
+    } catch (error) {
+        next(error)
+    }
+})
+
+//get user by id by params.
+userRouter.get('/:userId', async (req, res, next) => {
+    const { userId } = req.params
+    console.log('getting user with id', userId)
+    console.log(userId)
+    console.log(req.params)
+    try {
+        const user = await getUserById(userId)
+        res.send(user)
+    } catch (error) {
+        next(error)
+    }
+})
+
+//get user by id by body. for the flash card preview page.
+userRouter.get('/id', async (req, res, next) => {
+    const { creatorId } = req.body;
+
+    try {
+        const user = await getUserById(creatorId)
+        console.log(user, 'user')
+        res.send(user)
     } catch (error) {
         next(error)
     }

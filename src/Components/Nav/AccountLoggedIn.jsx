@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function AccountLoggedIn({ setToken, user }) {
-    console.log(user)
+    // console.log(user)
     const [accountOpen, setAccountOpen] = useState(false)
+
+    const navigate = useNavigate();
 
     const accountEnter = () => {
         setAccountOpen(true)
@@ -16,8 +18,10 @@ function AccountLoggedIn({ setToken, user }) {
     const logOut = () => {
         setToken('');
         localStorage.clear();
-
+        navigate('/')
     }
+
+
 
     return (
         <div >

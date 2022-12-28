@@ -23,7 +23,7 @@ function Browse() {
 
     let mappedDecks = pubDecks.map((x) => {
         return (
-            <DeckPreview creatorId={x.creatorId} topic={x.topic} creatorName={x.creatorName} />
+            <DeckPreview creatorId={x.creatorId} topic={x.topic} creatorName={x.creatorName} deckId={x.id} />
 
 
             //     Creator's Profile Picture, amount of terms in the deck.
