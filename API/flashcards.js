@@ -35,11 +35,11 @@ flashRouter.post('/create', async (req, res, next) => {
 })
 
 //get flashcards by deck... WILL NEED TO BE PARAMS
-flashRouter.get('/id', async (req, res, next) => {
+flashRouter.get('/:deckId', async (req, res, next) => {
     console.log(req.body, 'help')
-    const { deckId } = req.body;
+    // const { deckId } = req.body;
     try {
-        const flashCards = await getFlashCardsByDeck(deckId);
+        const flashCards = await getFlashCardsByDeck(req.params.deckId);
 
         res.send(flashCards)
     } catch (error) {

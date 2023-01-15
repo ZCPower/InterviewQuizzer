@@ -19,6 +19,7 @@ export async function fetchAllFlashcards() {
     }
 }
 
+//move this bad boy to the decks file and fix any files that depend on it.
 export async function fetchAllPublicDecks() {
     const url = `${baseURL}/decks`;
     try {
@@ -38,3 +39,14 @@ export async function fetchAllPublicDecks() {
 
 }
 
+export async function fetchCardsByDeck(deckId) {
+    const url = `${baseURL}/flash/${deckId}`;
+
+    try {
+        const response = await fetch(url);
+        const data = response.json();
+        return data;
+    } catch (error) {
+        console.error(error)
+    }
+}

@@ -2,6 +2,7 @@ import React from 'react'
 import NavAccount from './AccountLoggedOut'
 import { Link } from 'react-router-dom'
 import AccountLoggedIn from './AccountLoggedIn'
+import StudyNav from './StudyNav'
 
 function Header({ token, setToken, user }) {
     // add accordion/hamburger icon at smaller viewports...
@@ -26,9 +27,7 @@ function Header({ token, setToken, user }) {
 
                     {/* //Link to Study Page */}
                     {token ?
-                        <Link to='study'>
-                            <li className=' hover:text-midOrange flex justify-evenly gap-2 items-center'>Study <img className='h-7 pt-1 ' src='https://cdn-icons-png.flaticon.com/128/2904/2904859.png'></img></li>
-                        </Link>
+                        <StudyNav />
                         : null}
 
                     {/* Nav Dropdown Links */}

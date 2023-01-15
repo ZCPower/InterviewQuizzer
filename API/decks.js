@@ -31,6 +31,7 @@ deckRouter.post('/', async (req, res, next) => {
             creatorId: creatorId,
             creatorName: creatorName
             //Perhaps add creator photo, but how do we edit that later. Would be better to have that be an api call, probably. Same with Name.
+
         })
 
         res.send(deck)

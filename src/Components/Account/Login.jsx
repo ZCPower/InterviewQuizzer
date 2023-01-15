@@ -38,7 +38,7 @@ function Login() {
                         setToken(results.token)
                         console.log(results)
                         successMessage(results.message)
-                        navigate('/study')
+                        navigate('/browse')
                     }
                 })
         } catch (error) {
