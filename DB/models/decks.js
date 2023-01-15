@@ -41,8 +41,18 @@ async function getAllDecks() {
 }
 
 //so that users can browse all of their decks.
-async function getDecksByUserId() {
+async function getDecksByUserId(id) {
+    try {
+        const { rows } = await client.query(`
+            SELECT * FROM decks
+            WHERE "creatorId" = ${id};
+        `);
 
+
+        return rows
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 //delete deck with associated id if userId === creatorId
@@ -57,5 +67,6 @@ async function modifyDeck() {
 
 module.exports = {
     createNewDeck,
-    getAllPublicDecks
+    getAllPublicDecks,
+    getDecksByUserId
 }

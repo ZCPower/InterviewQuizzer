@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getUserByBody } from '../../api/users'
+// import { getUserByBody } from '../../api/users'
 import { Link } from 'react-router-dom'
 
 function DeckPreview({ topic, creatorId, creatorName, deckId }) {
@@ -20,11 +20,11 @@ function DeckPreview({ topic, creatorId, creatorName, deckId }) {
     useEffect(() => {
         async function getUserInfo() {
             try {
-                await getUserByBody(creatorId)
-                    .then((result) => {
-                        console.log(result)
-                        setCreator(result)
-                    })
+                // await getUserByBody(creatorId)
+                //     .then((result) => {
+                //         console.log(result)
+                //         setCreator(result)
+                //     })
             } catch (error) {
                 console.log(error)
             }

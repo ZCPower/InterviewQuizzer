@@ -12,6 +12,7 @@
     "fullBuild": "concurrently \"npm run api\"  \"npm run build\""
   },
   "dependencies": {
+    "@material-tailwind/react": "^1.2.5",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",

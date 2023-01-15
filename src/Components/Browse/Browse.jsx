@@ -58,7 +58,7 @@ function Browse() {
 
                 {token ?
                     <button
-                        onClick={addDeck}
+                        onClick={() => { navigate('/addDeck') }}
                         className='border-2 rounded-lg bg-black text-white px-1 text-xl self-center text-center flex items-center justify-center'>{!creating ? 'Create Deck' : 'Browse Decks'}
 
                         <span className='text-orange text-2xl ml-2'>{!creating ? '+' : null}</span></button> : null}

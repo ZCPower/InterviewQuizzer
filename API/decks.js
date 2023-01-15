@@ -1,6 +1,7 @@
 const express = require('express');
 const { createNewDeck, getAllPublicDecks } = require('../DB/models/decks');
-const { getFlashCardsByDeck } = require('../DB/models/flashcard');
+const { getFlashCardsByDeck, } = require('../DB/models/flashcard');
+const { getDecksByUserId } = require('../DB/models/decks');
 const deckRouter = express.Router();
 
 deckRouter.use((req, res, next) => {
@@ -52,6 +53,16 @@ deckRouter.get('/:deckId', async (req, res, next) => {
     }
 })
 
+deckRouter.get('/user/:userId', async (req, res, next) => {
+    console.log(req.params)
+    const { userId } = req.params
+    try {
+        const deck = await getDecksByUserId(userId);
+        res.send(deck);
+    } catch (error) {
+        next(error)
+    }
+})
 
 
 

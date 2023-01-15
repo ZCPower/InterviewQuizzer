@@ -24,7 +24,21 @@ export async function createDeck(topic, isPublic, creatorId, creatorName) {
     }
 }
 
-// topic: topic,
-//     isPublic: isPublic,
-//         creatorId: creatorId,
-//             creatorName: creatorName
+export async function fetchDeckByUser(userId) {
+    const url = `${baseURL}/user/${userId}`;
+    // console.log('hi')
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const data = response.json();
+        // console.log('we in here')
+        console.log(data, 'hello')
+        return data;
+    } catch (error) {
+        console.error(error)
+    }
+}
